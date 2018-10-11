@@ -1,0 +1,7 @@
+<%= form_tag('product_stats', method: 'post') do |f|%>
+  <%= label_tag(:file, 'select csv') %>
+  <br/>
+  <%= file_field_tag('csv') %>
+  <br/>
+  <%= submit_tag('Submit') %>
+<% end %>
