@@ -1,7 +1,7 @@
-<%= form_tag('product_stats', method: 'post') do |f|%>
-  <%= label_tag(:file, 'select csv') %>
+<%= form_tag('product_stat', method: 'post', remote: true) do |f|%>
+  <%= label_tag(:product_id, 'search for product id') %>
   <br/>
-  <%= file_field_tag('csv') %>
+  <%= text_field_tag(:product_id) %>
   <br/>
   <%= submit_tag('Submit') %>
 <% end %>
