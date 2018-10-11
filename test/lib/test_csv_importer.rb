@@ -1,16 +1,30 @@
-require 'minitest/spec'
 require 'test_helper'
 describe CSVImporter do
+
+  def setup
+    rand_store_id = generate_csv_file
+    @file         = open_test_file(rand_store_id)
+  end
 
   it 'test class exists' do
     assert(CSVImporter)
   end
 
   it 'takes csv formatted files' do
-    rand_store_id = generate_csv_file
-    file          = open_test_file(rand_store_id)
-    csv_importer  = CSVImporter.new(file)
+    csv_importer  = CSVImporter.new(@file)
     csv_importer.process
+  end
+
+  it 'responds to process' do
+    csv_importer  = CSVImporter.new(@file)
+    assert_respond_to csv_importer, :process
+  end
+
+  it 'creates listings' do
+    csv_importer  = CSVImporter.new(@file)
+    csv_importer.process
+
+    refute_equal Listing.count, 0
   end
 end
 
