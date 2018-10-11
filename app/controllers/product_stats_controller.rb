@@ -3,29 +3,35 @@ class ProductStatsController < ApplicationController
   end
 
   def show
-    id = show_params[:product_id]
+    id = permitted_params[:product_id]
     @product = Product.find_by_id(id)
-    @listings = Listing.where(product: @product)
+    if !@product.present?
+      redirect_to_index(id)
+    else
+      @listings = Listing.where(product: @product)
+      @prices = @listings.map(&:price).map(&:to_f)
+    end
   end
 
   def search
-    id = search_params[:product_id]
+    id = permitted_params[:product_id]
     @product = Product.find_by_id(id)
     if !@product.present?
-      flash[:warn] = "There is no product with the id of #{id}"
-      redirect_to action: :index
+      redirect_to_index(id)
     else
-      redirect_to action: show, id: @product.id
+      redirect_to action: :show, product_id: @product.id
     end
   end
 
   private
 
-  def search_params
+  def permitted_params
     params.permit(:product_id)
   end
 
-  def show_params
-    params.permit(:product_id)
+  def redirect_to_index(id)
+    flash[:warn] = "There is no product with the id of #{id}"
+    redirect_to action: :index
   end
+
 end

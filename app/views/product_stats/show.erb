@@ -1,5 +1,21 @@
 <%= @product.inspect %>
 <br/>
+<h1>
+  Min:
+  <%= @prices.min %>
+</h1>
+<h1>
+  Max
+  <%= @prices.max %>
+</h1>
+<h1>
+  Mean
+  <%= @prices.mean %>
+</h1>
+<h1>
+  Variance
+  <%= @prices.variance %>
+</h1>
 <ul>
 <% @listings.each do |listing| %>
   <li>
