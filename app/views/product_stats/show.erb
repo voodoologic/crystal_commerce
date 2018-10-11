@@ -16,9 +16,19 @@
   Variance
   <%= @prices.variance %>
 </h1>
+<h1>
+  Standard deviation
+  <%= @prices.standard_deviation %>
+</h1>
 <ul>
 <% @listings.each do |listing| %>
-  <li>
-    <%= listing.inspect %>
-  </li>
+  <% if (@prices.mean - listing.price.to_f).abs > @prices.standard_deviation %>
+    <li style='background:red'>
+      <%= listing.inspect %>
+    </li>
+  <% else %>
+    <li>
+      <%= listing.inspect %>
+    </li>
+  <% end %>
 <% end %>

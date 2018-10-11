@@ -4,10 +4,10 @@ class CsvImporterController < ApplicationController
   end
 
   def upload
-    upload= upload_params[:csv]
-    file = File.open(upload)
-    csv_importer = CSVImporter.new(file)
+    upload= upload_params[:csv] #it's possible to have multiple files, but I didn't do that
+    csv_importer = CSVImporter.new(upload)
     csv_importer.process
+    # ProcessCsvJob.perform_later(upload)
     flash[:notice] = 'Successfully processed csv'
     redirect_to action: :index
   end
