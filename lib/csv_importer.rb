@@ -24,7 +24,7 @@ class CSVImporter
 
   def listing_from_row(listing_row)
     p = Product.where(id: listing_row[0]).first_or_initialize
-    p.save if p.new_record?
+    p.save! if p.new_record?
     listing = Listing.new
     listing.store = @store
     listing.product = p
