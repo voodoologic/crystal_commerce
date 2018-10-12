@@ -23,6 +23,7 @@
 <ul>
 <% @listings.each do |listing| %>
   <% if (@prices.mean - listing.price.to_f).abs > @prices.standard_deviation %>
+    <!-- quick and dirty solution; find a more elegant solution like helpers -->
     <li style='background:red'>
       <%= listing.inspect %>
     </li>

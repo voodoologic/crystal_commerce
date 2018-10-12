@@ -6,6 +6,7 @@ class ProcessCsvJob < ApplicationJob
   queue_as :default
 
   def perform(upload)
+    #not being used currently
     csv_importer = CSVImporter.new(upload)
     # ActiveRecord::Base.transaction do could invalidate an entire run
     csv_importer.process
