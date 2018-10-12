@@ -5,7 +5,7 @@ class Listing < ApplicationRecord
   validates :price, presence: true
 
   def format_price_string
-    self.price = price.gsub('$', '').strip
+    self.price = price.gsub('$', '').strip #code from my old CSV
   end
 
 end
